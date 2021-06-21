@@ -32,7 +32,7 @@ b(b>1) = 1; b(b<0) = 0;
 % Initialization
 z0 = initInpainting(b,A==0,5);                     % ADMM initial point
 W_nosym = @(x) JNLM(x,z0,patchRad,searchRad,h);    % Non-symmetric linear denoiser
-[~,~,~,~,D] = JNLM(z0,z0,patchRad,searchRad,h);    % Normalizing weights
+[~,D] = JNLM(z0,z0,patchRad,searchRad,h);          % Normalizing weights
 prox_map = @(x,r) prox_inpainting(r,D,A,b,x);      % Proximal map
 objfun = @(x,z,v) eval_fidelity_inpainting(x,A,b) +...
          rho * eval_regularizer(z,v,D);            % Objective function
@@ -71,10 +71,10 @@ pause(0.1);
 
 ax2 = subplot(1,3,2);
 plot(0:length(primal_res)-1,log(primal_res),'LineWidth',2.5,'Color','g',...
-    'DisplayName','$\log(\mathbf{x}_{k+1} - \mathbf{z}_{k+1})$');
+    'DisplayName','$\log(\| \mathbf{x}_{k+1} - \mathbf{z}_{k+1} \|_2)$');
 hold on;
 plot(0:length(dual_res)-1,log(dual_res),'LineWidth',2.5,'Color','m',...
-    'DisplayName','$\log(\mathbf{z}_{k+1} - \mathbf{z}_k)$');
+    'DisplayName','$\log(\| \mathbf{z}_{k+1} - \mathbf{z}_k \|_2)$');
 grid on; hold off; axis tight;
 xlabel('Iteration','Interpreter','latex');
 title('Errors','Interpreter','latex');
