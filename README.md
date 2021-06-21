@@ -12,5 +12,5 @@ R. G. Gavaskar, C. D. Athalye and K. N. Chaudhury, "On Plug-and-Play Regularizat
 Run the file Inpainting/demo_inpainting.m
 
 ## Image deblurring using scaled PnP-FISTA:
-The code will be uploaded soon...
+Run the file Deblurring/demo_deblurring.m
 
